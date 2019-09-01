@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+	<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="pingback" href="https://duskguard.github.io/xmlrpc.php" />
+
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+
+		<script>
+		function trace(msg) {
+			function var_dump(arr, level) {
+				var dumped_text = "";
+				if (!level)
+					level = 0;
+
+				//The padding given at the beginning of the line.
+				var level_padding = "";
+				for ( var j = 0; j < level + 1; j++ )
+					level_padding += "    ";
+
+				if ( 'object' === typeof(arr) ) { //Array/Hashes/Objects
+					for ( var item in arr ) {
+						var value = arr[item];
+
+						if ( 'object' === typeof(value) ) { //If it is an array,
+							dumped_text += level_padding + "'" + item + "' ...\n";
+							dumped_text += var_dump(value, level + 1);
+						} else {
+							dumped_text += level_padding + "'" + item + "' => " + "(" + typeof(value) + ") \"" + value + "\"\n";
+						}
+					}
+				} else { //Stings/Chars/Numbers etc.
+					dumped_text = "(" + typeof(arr) + ") " + arr;
+					return dumped_text;
+				}
+				if ( 0 === level ) {
+					return '(object)' + String.fromCharCode(10) + dumped_text;
+				} else {
+					return dumped_text;
+				}
+			}
+			trace.trace_queue.push(var_dump(msg));
+		}
+		trace.trace_queue = []; // Don't pollute global namespace
+
+		// Try to keep order of operations by transmitting via queue
+		setInterval(function() {
+			if (0 === trace.trace_queue.length )
+				return;
+			var msg = trace.trace_queue.shift();
+
+			// Transmit message via XHR
+			var xmlhttp;
+			if ( window.XMLHttpRequest ) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+			}
+			var addy = window.location.toString();
+			var url = trace.getLeftMost( addy, "//" ) + "//";
+			url += trace.getLeftMost( trace.delLeftMost( addy + "/", "//"), "/") + "/ds-plugins/debug-trace/debug-trace.php";
+			xmlhttp.open( "GET", url + "?m=" + encodeURIComponent( msg.toString().substring( 0, 2000 ) ), true );
+			xmlhttp.send();
+		}, 50);
+
+		// Utility parsing functions in trace namespace
+		trace.delLeftMost = function( sSource, sFind ) {
+			for ( var i = 0; i < sSource.length; i = i + 1 ) {
+				var f = sSource.indexOf(sFind, i);
+				if ( -1 !== f ) {
+					return sSource.substr( f + sFind.length, sSource.length );
+					break;
+				}
+			}
+			return sSource;
+		};
+		trace.getLeftMost = function( sSource, sFind ) {
+			for ( var i = 0; i < sSource.length; i = i + 1 ) {
+				var f = sSource.indexOf( sFind, i );
+				if ( -1 !== f ) {
+					return sSource.substr( 0, f );
+					break;
+				}
+			}
+			return sSource;
+		};
+	</script>
+<script>var et_site_url='https://duskguard.github.io';var et_post_id='14';function et_core_page_resource_fallback(a,b){"undefined"===typeof b&&(b=a.sheet.cssRules&&0===a.sheet.cssRules.length);b&&(a.onerror=null,a.onload=null,a.href?a.href=et_site_url+"/?et_core_page_resource="+a.id+et_post_id:a.src&&(a.src=et_site_url+"/?et_core_page_resource="+a.id+et_post_id))}
+</script><title>Cryptic Crown | Trent Apt</title>
+<meta name='robots' content='noindex,follow' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="Cryptic Crown &raquo; Feed" href="https://duskguard.github.io/?feed=rss2" />
+<link rel="alternate" type="application/rss+xml" title="Cryptic Crown &raquo; Comments Feed" href="https://duskguard.github.io/?feed=comments-rss2" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/crypticcrown.dev.cc\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.2.2"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55357,56424,55356,57342,8205,55358,56605,8205,55357,56424,55356,57340],[55357,56424,55356,57342,8203,55358,56605,8203,55357,56424,55356,57340]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<meta content="Divi v.3.27.3" name="generator"/><style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='wp-block-library-css'  href='https://duskguard.github.io/wp-includes/css/dist/block-library/style.min.css?ver=5.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='serverpress-css'  href='https://duskguard.github.io/ds-plugins/ds-cli/fontello/css/serverpress.css?ver=5.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='sp-animation-css'  href='https://duskguard.github.io/ds-plugins/ds-cli/fontello/css/animation.css?ver=5.2.2' type='text/css' media='all' />
+<link rel='stylesheet' id='divi-fonts-css'  href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&#038;subset=latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='divi-style-css'  href='https://duskguard.github.io/wp-content/themes/Cryptic-Crown/style.css?ver=3.27.3' type='text/css' media='all' />
+<link rel='stylesheet' id='et-builder-googlefonts-cached-css'  href='https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;ver=5.2.2#038;subset=vietnamese,latin,latin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='https://duskguard.github.io/wp-includes/css/dashicons.min.css?ver=5.2.2' type='text/css' media='all' />
+<script type='text/javascript' src='https://duskguard.github.io/wp-includes/js/jquery/jquery.js?ver=1.12.4-wp'></script>
+<script type='text/javascript' src='https://duskguard.github.io/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var ds_cli = {"ajaxurl":"https:\/\/crypticcrown.dev.cc\/wp-admin\/admin-ajax.php","nonce":"0b0e0f8f28"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://duskguard.github.io/ds-plugins/ds-cli/js/ds-cli.js?ver=5.2.2'></script>
+<link rel='https://api.w.org/' href='https://duskguard.github.io/index.php?rest_route=/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://duskguard.github.io/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://duskguard.github.io/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.2.2" />
+<link rel="canonical" href="https://duskguard.github.io/" />
+<link rel='shortlink' href='https://duskguard.github.io/' />
+<link rel="alternate" type="application/json+oembed" href="https://duskguard.github.io/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=https%3A%2F%2Fduskguard.github.io%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://duskguard.github.io/index.php?rest_route=%2Foembed%2F1.0%2Fembed&#038;url=https%3A%2F%2Fduskguard.github.io%2F&#038;format=xml" />
+<style type='text/css'>
+	#wp-admin-bar-environment-notice>div,
+	#wpadminbar { background-color: #0073AA !important }
+	#wp-admin-bar-environment-notice { display: none }
+	@media only screen and (min-width: 1030px) {
+	    #wp-admin-bar-environment-notice { display: block }
+	    #wp-admin-bar-environment-notice > div > span {
+	        /*color: #EEE !important;*/
+	        font-size: 130% !important;
+	    }
+		#wpadminbar #adminbarsearch:before, #wpadminbar .ab-icon:before, #wpadminbar .ab-item:before {
+			color: #eee !important;
+		}
+	}
+	#wpadminbar .ab-empty-item,#wpadminbar a.ab-item,#wpadminbar>#wp-toolbar span.ab-label,#wpadminbar>#wp-toolbar span.noticon{color:#eee;}
+	#adminbarsearch:before,
+	.ab-icon:before,
+	.ab-item:before { color: #EEE !important }
+</style>
+				<style type="text/css">
+					@font-face { font-family:Beon;src:url(https://duskguard.github.io/wp-content/uploads/2019/08/Beon-Regular.otf) format('opentype');font-display: auto;}@font-face { font-family:Nemoy;src:url(https://duskguard.github.io/wp-content/uploads/2019/08/NemoyMedium.otf) format('opentype');font-display: auto;}@font-face { font-family:Nemoy Bold;src:url(https://duskguard.github.io/wp-content/uploads/2019/08/NemoyBold.otf) format('opentype');font-display: auto;}				</style>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" /><link rel="icon" href="https://duskguard.github.io/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-32x32.png" sizes="32x32" />
+<link rel="icon" href="https://duskguard.github.io/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-192x192.png" sizes="192x192" />
+<link rel="apple-touch-icon-precomposed" href="https://duskguard.github.io/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-180x180.png" />
+<meta name="msapplication-TileImage" content="https://duskguard.github.io/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-270x270.png" />
+<link rel="stylesheet" id="et-core-unified-cached-inline-styles" href="https://duskguard.github.io/wp-content/cache/et/14/et-core-unified-15673725025949.min.css" onerror="et_core_page_resource_fallback(this, true)" onload="et_core_page_resource_fallback(this)" /></head>
+<body class="home page-template-default page page-id-14 airplane-mode-disabled airplane-mode-no-qm et_pb_button_helper_class et_transparent_nav et_fullwidth_secondary_nav et_fixed_nav et_show_nav et_cover_background et_pb_gutter et_pb_gutters3 et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_pb_footer_columns4 et_header_style_fullscreen et_header_style_left et_pb_no_top_bar_fullscreen et_pb_pagebuilder_layout et_smooth_scroll et_right_sidebar et_divi_theme et-db et_minified_js et_minified_css">
+	<div id="page-container">
+
+	
+					<div class="et_slide_in_menu_container">
+							<span class="mobile_menu_bar et_toggle_fullscreen_menu"></span>
+			
+						
+						
+			<div class="et_pb_fullscreen_nav_container">
+				
+				<ul id="mobile_menu_slide" class="et_mobile_menu">
+
+				<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-14 current_page_item menu-item-28"><a href="https://duskguard.github.io/" aria-current="page">Home</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27"><a href="https://duskguard.github.io/?page_id=17">About Me</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-26"><a href="https://duskguard.github.io/?page_id=19">Portfolio</a></li>
+<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://duskguard.github.io/?page_id=22">Contact Me</a></li>
+
+				</ul>
+			</div>
+		</div>
+		
+			<header id="main-header" data-height-onload="120">
+			<div class="container clearfix et_menu_container">
+							<div class="logo_container">
+					<span class="logo_helper"></span>
+					<a href="https://duskguard.github.io/">
+						<img src="https://duskguard.github.io/wp-content/uploads/2019/08/Cryptic-Banner.png" alt="Cryptic Crown" id="logo" data-height-percentage="100" />
+					</a>
+				</div>
+							<div id="et-top-navigation" data-height="120" data-fixed-height="85">
+					
+					
+											<span class="mobile_menu_bar et_pb_header_toggle et_toggle_fullscreen_menu"></span>
+					
+					
+									</div> <!-- #et-top-navigation -->
+			</div> <!-- .container -->
+			<div class="et_search_outer">
+				<div class="container et_search_form_container">
+					<form role="search" method="get" class="et-search-form" action="https://duskguard.github.io/">
+					<input type="search" class="et-search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />					</form>
+					<span class="et_close_search_field"></span>
+				</div>
+			</div>
+		</header> <!-- #main-header -->
+			<div id="et-main-area">
+	
+<div id="main-content">
+
+
+			
+				<article id="post-14" class="post-14 page type-page status-publish hentry">
+
+				
+					<div class="entry-content">
+					<div id="et-boc" class="et-boc">
+			
+			<div class="et_builder_inner_content et_pb_gutters3"><div class="et_pb_section et_pb_section_0 et_pb_section_parallax et_pb_with_background et_pb_fullwidth_section et_section_regular">
+				
+				<div class="et_parallax_bg_wrap"><div
+						class="et_parallax_bg"
+						style="background-image: url(https://duskguard.github.io/wp-content/uploads/2019/08/violet.gif);"
+					></div></div>
+				
+				
+					<section class="et_pb_module et_pb_fullwidth_header et_pb_fullwidth_header_0 et_pb_bg_layout_dark et_pb_text_align_center et_pb_fullscreen">
+				
+				
+				<div class="et_pb_fullwidth_header_container center">
+					<div class="header-content-container center">
+					<div class="header-content">
+						
+						<h1 class="et_pb_module_header">Trent Apt</h1>
+						<span class="et_pb_fullwidth_header_subhead">Developer & Aspiring UX Designer </span>
+						
+						
+					</div>
+				</div>
+					
+				</div>
+				<div class="et_pb_fullwidth_header_overlay"></div>
+				<div class="et_pb_fullwidth_header_scroll"></div>
+			</section><div class="et_pb_module et_pb_fullwidth_image et_pb_fullwidth_image_0">
+				
+				
+				<img src="https://duskguard.github.io/wp-content/uploads/2019/08/Home.png" />
+			
+			</div><div class="et_pb_module et_pb_fullwidth_code et_pb_fullwidth_code_0  et_pb_text_align_center">
+				
+				
+				<div class="et_pb_code_inner">
+  <button href="#"class="display-btn">
+     <a href="https://google.ca" target="_self" rel="next noopener noreferrer">
+    
+    </a>
+  </button>
+  <button url="#" class="display-btn">
+     <a href="https://duskguard.github.io/?page_id=17">
+    
+    </a>
+  </button>
+  <button link="#" class="display-btn">
+     <a href="https://duskguard.github.io/?page_id=19">
+    
+    </a>
+  </button>
+  <button class="display-btn">
+     <a href="https://duskguard.github.io/?page_id=22">
+    
+    </a>
+  </button></div>
+			</div> <!-- .et_pb_fullwidth_code -->
+				
+				
+			</div> <!-- .et_pb_section -->			</div>
+			
+		</div>					</div> <!-- .entry-content -->
+
+				
+				</article> <!-- .et_pb_post -->
+
+			
+
+</div> <!-- #main-content -->
+
+
+			<footer id="main-footer">
+				
+
+		
+				<div id="footer-bottom">
+					<div class="container clearfix">
+									</div>	<!-- .container -->
+				</div>
+			</footer> <!-- #main-footer -->
+		</div> <!-- #et-main-area -->
+
+
+	</div> <!-- #page-container -->
+
+		<script type="text/javascript">
+			</script>
+	<script type='text/javascript' src='https://duskguard.github.io/wp-includes/js/jquery/ui/effect.min.js?ver=1.11.4'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var DIVI = {"item_count":"%d Item","items_count":"%d Items"};
+var et_shortcodes_strings = {"previous":"Previous","next":"Next"};
+var et_pb_custom = {"ajaxurl":"https:\/\/crypticcrown.dev.cc\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/crypticcrown.dev.cc\/wp-content\/themes\/Cryptic-Crown\/images","builder_images_uri":"https:\/\/crypticcrown.dev.cc\/wp-content\/themes\/Cryptic-Crown\/includes\/builder\/images","et_frontend_nonce":"43c7ed2dd9","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"7ddab48a9c","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","ignore_waypoints":"no","is_divi_theme_used":"1","widget_search_selector":".widget_search","is_ab_testing_active":"","page_id":"14","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":""};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://duskguard.github.io/wp-content/themes/Cryptic-Crown/js/custom.min.js?ver=3.27.3'></script>
+<script type='text/javascript' src='https://duskguard.github.io/wp-content/themes/Cryptic-Crown/core/admin/js/common.js?ver=3.27.3'></script>
+<script type='text/javascript' src='https://duskguard.github.io/wp-includes/js/wp-embed.min.js?ver=5.2.2'></script>
+</body>
+</html>
