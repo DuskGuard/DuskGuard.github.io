@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+	<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	
+
+	<script type="text/javascript">
+		document.documentElement.className = 'js';
+	</script>
+
+		<script>
+		function trace(msg) {
+			function var_dump(arr, level) {
+				var dumped_text = "";
+				if (!level)
+					level = 0;
+
+				//The padding given at the beginning of the line.
+				var level_padding = "";
+				for ( var j = 0; j < level + 1; j++ )
+					level_padding += "    ";
+
+				if ( 'object' === typeof(arr) ) { //Array/Hashes/Objects
+					for ( var item in arr ) {
+						var value = arr[item];
+
+						if ( 'object' === typeof(value) ) { //If it is an array,
+							dumped_text += level_padding + "'" + item + "' ...\n";
+							dumped_text += var_dump(value, level + 1);
+						} else {
+							dumped_text += level_padding + "'" + item + "' => " + "(" + typeof(value) + ") \"" + value + "\"\n";
+						}
+					}
+				} else { //Stings/Chars/Numbers etc.
+					dumped_text = "(" + typeof(arr) + ") " + arr;
+					return dumped_text;
+				}
+				if ( 0 === level ) {
+					return '(object)' + String.fromCharCode(10) + dumped_text;
+				} else {
+					return dumped_text;
+				}
+			}
+			trace.trace_queue.push(var_dump(msg));
+		}
+		trace.trace_queue = []; // Don't pollute global namespace
+
+		// Try to keep order of operations by transmitting via queue
+		setInterval(function() {
+			if (0 === trace.trace_queue.length )
+				return;
+			var msg = trace.trace_queue.shift();
+
+			// Transmit message via XHR
+			var xmlhttp;
+			if ( window.XMLHttpRequest ) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject( "Microsoft.XMLHTTP" );
+			}
+			var addy = window.location.toString();
+			var url = trace.getLeftMost( addy, "//" ) + "//";
+			url += trace.getLeftMost( trace.delLeftMost( addy + "/", "//"), "/") + "/ds-plugins/debug-trace/debug-trace.php";
+			xmlhttp.open( "GET", url + "?m=" + encodeURIComponent( msg.toString().substring( 0, 2000 ) ), true );
+			xmlhttp.send();
+		}, 50);
+
+		// Utility parsing functions in trace namespace
+		trace.delLeftMost = function( sSource, sFind ) {
+			for ( var i = 0; i < sSource.length; i = i + 1 ) {
+				var f = sSource.indexOf(sFind, i);
+				if ( -1 !== f ) {
+					return sSource.substr( f + sFind.length, sSource.length );
+					break;
+				}
+			}
+			return sSource;
+		};
+		trace.getLeftMost = function( sSource, sFind ) {
+			for ( var i = 0; i < sSource.length; i = i + 1 ) {
+				var f = sSource.indexOf( sFind, i );
+				if ( -1 !== f ) {
+					return sSource.substr( 0, f );
+					break;
+				}
+			}
+			return sSource;
+		};
+	</script>
+<script>var et_site_url='https://PLACEHOLDER.wpsho';var et_post_id='19';function et_core_page_resource_fallback(a,b){"undefined"===typeof b&&(b=a.sheet.cssRules&&0===a.sheet.cssRules.length);b&&(a.onerror=null,a.onload=null,a.href?a.href=et_site_url+"/?et_core_page_resource="+a.id+et_post_id:a.src&&(a.src=et_site_url+"/?et_core_page_resource="+a.id+et_post_id))}
+</script><title>Portfolio | Cryptic Crown</title>
+
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//s.w.org">
+
+
+<link rel="stylesheet" id="wp-block-library-css" href="https://PLACEHOLDER.wpsho/wp-includes/css/dist/block-library/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="serverpress-css" href="https://PLACEHOLDER.wpsho/ds-plugins/ds-cli/fontello/css/serverpress.css" type="text/css" media="all">
+<link rel="stylesheet" id="sp-animation-css" href="https://PLACEHOLDER.wpsho/ds-plugins/ds-cli/fontello/css/animation.css" type="text/css" media="all">
+<link rel="stylesheet" id="divi-fonts-css" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,latin-ext" type="text/css" media="all">
+<link rel="stylesheet" id="divi-style-css" href="https://PLACEHOLDER.wpsho/wp-content/themes/Cryptic-Crown/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="et-builder-googlefonts-cached-css" href="https://fonts.googleapis.com/css?family=Montserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2Cregular%2Citalic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CLobster+Two%3Aregular%2Citalic%2C700%2C700italic%7CLobster%3Aregular&ver=5.2.2#038;subset=vietnamese,latin,latin-ext,cyrillic" type="text/css" media="all">
+<link rel="stylesheet" id="dashicons-css" href="https://PLACEHOLDER.wpsho/wp-includes/css/dashicons.min.css" type="text/css" media="all">
+<script type="text/javascript" src="https://PLACEHOLDER.wpsho/wp-includes/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="https://PLACEHOLDER.wpsho/wp-includes/js/jquery/jquery-migrate.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var ds_cli = {"ajaxurl":"https:\/\/PLACEHOLDER.wpsho\/wp-admin\/admin-ajax.php","nonce":"0b0e0f8f28"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://PLACEHOLDER.wpsho/ds-plugins/ds-cli/js/ds-cli.js"></script>
+
+
+
+
+
+
+
+<style type="text/css">
+	#wp-admin-bar-environment-notice>div,
+	#wpadminbar { background-color: #0073AA !important }
+	#wp-admin-bar-environment-notice { display: none }
+	@media only screen and (min-width: 1030px) {
+	    #wp-admin-bar-environment-notice { display: block }
+	    #wp-admin-bar-environment-notice > div > span {
+	        /*color: #EEE !important;*/
+	        font-size: 130% !important;
+	    }
+		#wpadminbar #adminbarsearch:before, #wpadminbar .ab-icon:before, #wpadminbar .ab-item:before {
+			color: #eee !important;
+		}
+	}
+	#wpadminbar .ab-empty-item,#wpadminbar a.ab-item,#wpadminbar>#wp-toolbar span.ab-label,#wpadminbar>#wp-toolbar span.noticon{color:#eee;}
+	#adminbarsearch:before,
+	.ab-icon:before,
+	.ab-item:before { color: #EEE !important }
+</style>
+				<style type="text/css">
+					@font-face { font-family:Beon;src:url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/Beon-Regular.otf) format('opentype');font-display: auto;}@font-face { font-family:Nemoy;src:url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/NemoyMedium.otf) format('opentype');font-display: auto;}@font-face { font-family:Nemoy Bold;src:url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/NemoyBold.otf) format('opentype');font-display: auto;}				</style>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"><link rel="icon" href="https://PLACEHOLDER.wpsho/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-32x32.png" sizes="32x32">
+<link rel="icon" href="https://PLACEHOLDER.wpsho/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon-precomposed" href="https://PLACEHOLDER.wpsho/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-180x180.png">
+<meta name="msapplication-TileImage" content="https://PLACEHOLDER.wpsho/wp-content/uploads/2019/08/cropped-Cryptic-Crown_Profile-Logo-270x270.png">
+<link rel="stylesheet" id="et-core-unified-cached-inline-styles" href="https://PLACEHOLDER.wpsho/wp-content/cache/et/19/et-core-unified-15673585751325.min.css" onerror="et_core_page_resource_fallback(this, true)" onload="et_core_page_resource_fallback(this)"></head>
+<body class="page-template-default page page-id-19 airplane-mode-disabled airplane-mode-no-qm et_pb_button_helper_class et_transparent_nav et_fullwidth_secondary_nav et_fixed_nav et_show_nav et_cover_background et_pb_gutter et_pb_gutters3 et_primary_nav_dropdown_animation_fade et_secondary_nav_dropdown_animation_fade et_pb_footer_columns4 et_header_style_fullscreen et_header_style_left et_pb_no_top_bar_fullscreen et_pb_pagebuilder_layout et_smooth_scroll et_right_sidebar et_divi_theme et-db et_minified_js et_minified_css">
+	<div id="page-container">
+
+	
+					<div class="et_slide_in_menu_container">
+							<span class="mobile_menu_bar et_toggle_fullscreen_menu"></span>
+			
+						
+						
+			<div class="et_pb_fullscreen_nav_container">
+				
+				<ul id="mobile_menu_slide" class="et_mobile_menu">
+
+				<li id="menu-item-28" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-28"><a href="https://PLACEHOLDER.wpsho/index.html">Home</a></li>
+<li id="menu-item-27" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-27"><a href="https://PLACEHOLDER.wpsho/about-me">About Me</a></li>
+<li id="menu-item-26" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-19 current_page_item menu-item-26"><a href="https://PLACEHOLDER.wpsho/portfolio" aria-current="page">Portfolio</a></li>
+<li id="menu-item-25" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-25"><a href="https://PLACEHOLDER.wpsho/contact-me">Contact Me</a></li>
+
+				</ul>
+			</div>
+		</div>
+		
+			<header id="main-header" data-height-onload="120">
+			<div class="container clearfix et_menu_container">
+							<div class="logo_container">
+					<span class="logo_helper"></span>
+					<a href="https://PLACEHOLDER.wpsho/index.html">
+						<img src="wp-content/uploads/2019/08/Cryptic-Banner.png" alt="Cryptic Crown" id="logo" data-height-percentage="100">
+					</a>
+				</div>
+							<div id="et-top-navigation" data-height="120" data-fixed-height="85">
+					
+					
+											<span class="mobile_menu_bar et_pb_header_toggle et_toggle_fullscreen_menu"></span>
+					
+					
+									</div> 
+			</div> 
+			<div class="et_search_outer">
+				<div class="container et_search_form_container">
+					<form role="search" method="get" class="et-search-form" action="https://PLACEHOLDER.wpsho/">
+					<input type="search" class="et-search-field" placeholder="Search …" value="" name="s" title="Search for:">					</form>
+					<span class="et_close_search_field"></span>
+				</div>
+			</div>
+		</header> 
+			<div id="et-main-area">
+	
+<div id="main-content">
+
+
+			
+				<article id="post-19" class="post-19 page type-page status-publish hentry">
+
+				
+					<div class="entry-content">
+					<div id="et-boc" class="et-boc">
+			
+			<div class="et_builder_inner_content et_pb_gutters3">
+				<div class="et_pb_section et_pb_section_0 et_pb_section_parallax et_pb_with_background et_section_regular">
+				
+				<div class="et_parallax_bg_wrap"><div class="et_parallax_bg et_parallax_bg_phone" style="background-image: url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/space.gif);"></div></div><div class="et_parallax_bg_wrap"><div class="et_parallax_bg_phone_exist et_parallax_bg et_parallax_bg_tablet" style="background-image: url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/space.gif);"></div></div><div class="et_parallax_bg_wrap"><div class="et_parallax_bg_phone_exist et_parallax_bg_tablet_exist et_parallax_bg" style="background-image: url(http://OFFLINEZIP.wpsho/wp-content/uploads/2019/08/space.gif);"></div></div>
+				
+				
+					<div class="et_pb_row et_pb_row_0">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_0  et_pb_css_mix_blend_mode_passthrough et-last-child">
+				
+				
+				<div class="et_pb_module et_pb_text et_pb_text_0 et_animated et_pb_bg_layout_light  et_pb_text_align_left">
+				
+				
+				<div class="et_pb_text_inner"><h1>” Design, just as art, has multiple definitions; there is no single definition. Design can be art. Design can be aesthetics. Design is so simple, that’s why it is so complicated. “</h1>
+<h2>– Paul Rand </h2></div>
+			</div> 
+			</div> 
+				
+				
+			</div> 
+				
+				
+			</div> <div class="et_pb_section et_pb_section_1 et_section_regular">
+				
+				
+				
+				
+					<div class="et_pb_row et_pb_row_1">
+				<div class="et_pb_column et_pb_column_4_4 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough et-last-child et_pb_column_empty">
+				
+				
+				
+			</div> 
+				
+				
+			</div> 
+				
+				
+			</div> 			</div>
+			
+		</div>					</div> 
+
+				
+				</article> 
+
+			
+
+</div> 
+
+
+			<footer id="main-footer">
+				
+
+		
+				<div id="footer-bottom">
+					<div class="container clearfix">
+									</div>	
+				</div>
+			</footer> 
+		</div> 
+
+
+	</div> 
+
+		<script type="text/javascript">
+				var et_animation_data = [{"class":"et_pb_text_0","style":"fade","repeat":"once","duration":"1200ms","delay":"0ms","intensity":"50%","starting_opacity":"0%","speed_curve":"ease-in-out"}];
+			</script>
+	<script type="text/javascript" src="https://PLACEHOLDER.wpsho/wp-includes/js/jquery/ui/effect.min.js"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var DIVI = {"item_count":"%d Item","items_count":"%d Items"};
+var et_shortcodes_strings = {"previous":"Previous","next":"Next"};
+var et_pb_custom = {"ajaxurl":"https:\/\/PLACEHOLDER.wpsho\/wp-admin\/admin-ajax.php","images_uri":"https:\/\/PLACEHOLDER.wpsho\/wp-content\/themes\/Cryptic-Crown\/images","builder_images_uri":"https:\/\/PLACEHOLDER.wpsho\/wp-content\/themes\/Cryptic-Crown\/includes\/builder\/images","et_frontend_nonce":"43c7ed2dd9","subscription_failed":"Please, check the fields below to make sure you entered the correct information.","et_ab_log_nonce":"7ddab48a9c","fill_message":"Please, fill in the following fields:","contact_error_message":"Please, fix the following errors:","invalid":"Invalid email","captcha":"Captcha","prev":"Prev","previous":"Previous","next":"Next","wrong_captcha":"You entered the wrong number in captcha.","ignore_waypoints":"no","is_divi_theme_used":"1","widget_search_selector":".widget_search","is_ab_testing_active":"","page_id":"19","unique_test_id":"","ab_bounce_rate":"5","is_cache_plugin_active":"no","is_shortcode_tracking":"","tinymce_uri":""};
+var et_pb_box_shadow_elements = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="https://PLACEHOLDER.wpsho/wp-content/themes/Cryptic-Crown/js/custom.min.js"></script>
+<script type="text/javascript" src="https://PLACEHOLDER.wpsho/wp-content/themes/Cryptic-Crown/core/admin/js/common.js"></script>
+</body>
+</html>
